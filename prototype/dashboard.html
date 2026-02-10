@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Dashboard — Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="dashboard">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="profile-tile">
+          <div class="avatar">AJ</div>
+          <div class="profile-info">
+            <div class="name">Priya Varghese</div>
+            <div class="role">Student • CSE</div>
+          </div>
+        </div>
+        <nav class="side-nav">
+          <a class="active" href="#">Dashboard</a>
+          <a href="#">Courses</a>
+          <a href="#">Notices</a>
+          <a href="#">Library</a>
+          <a href="#">Placements</a>
+          <a href="#">Forum</a>
+          <a href="#">Settings</a>
+        </nav>
+      </aside>
+
+      <div class="main-area">
+        <header class="dash-header">
+          <h2>Dashboard</h2>
+          <div class="dash-actions">
+            <div class="notif">🔔<span class="badge">3</span></div>
+            <div class="avatar-sm">PV</div>
+          </div>
+        </header>
+
+        <section class="dashboard-grid container">
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-value">8.6</div>
+              <div class="stat-label">CGPA</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">95%</div>
+              <div class="stat-label">Attendance</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Companies</div>
+            </div>
+          </div>
+
+          <div class="announcements">
+            <h3>Announcements</h3>
+            <ul>
+              <li>Semester exams start Mar 10 — check schedule</li>
+              <li>Project submissions due Feb 28</li>
+              <li>Internship applications open</li>
+            </ul>
+          </div>
+
+          <div class="upcoming">
+            <h3>Upcoming Events</h3>
+            <div class="event">Tech Symposium — Mar 18</div>
+            <div class="event">Alumni Meet — Apr 02</div>
+            <div class="event">Coding Contest — Apr 15</div>
+          </div>
+
+          <div class="courses">
+            <h3>Your Courses</h3>
+            <div class="course-row">
+              <div class="course-title">Data Structures</div>
+              <div class="course-progress">Progress: 72%</div>
+            </div>
+            <div class="course-row">
+              <div class="course-title">Operating Systems</div>
+              <div class="course-progress">Progress: 48%</div>
+            </div>
+            <div class="course-row">
+              <div class="course-title">Database Systems</div>
+              <div class="course-progress">Progress: 94%</div>
+            </div>
+          </div>
+
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+node_modules
+.next
+.env
+.env.local
+.env.*.local
+.DS_Store
+.vscode
+dist
+coverage
+npm-debug.log
+yarn-error.log
+
+# OS files
+Thumbs.db
+ehthumbs.db
+.idea
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# Local env files
+.env.local
