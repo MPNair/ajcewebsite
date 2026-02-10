@@ -6,27 +6,31 @@ const config: ThemeConfig = {
 }
 
 const colors = {
+  // Restored blue-teal palette (original)
   brand: {
-    50: '#ebf2ff',
-    100: '#cfe0ff',
-    200: '#9fbeff',
-    500: '#0B5FFF',
-    600: '#0a4de6',
-    700: '#0940cc'
+    50: '#e6f7ff',
+    100: '#ccefff',
+    200: '#99e0ff',
+    light: '#e6f0ff',
+    primary: '#0ea5e9',
+    500: '#0ea5e9',
+    600: '#0686c8',
+    700: '#046a9a'
   },
   accent: {
-    50: '#e0fefb',
-    100: '#b3fcf7',
-    500: '#00BFA6',
-    600: '#00a690',
-    700: '#00927a'
+    50: '#e6fff9',
+    100: '#ccfff3',
+    500: '#14b8a6',
+    600: '#0ea58f',
+    700: '#0b8f76'
   },
   neutral: {
-    50: '#F8FAFC',
-    100: '#f1f5f9',
-    400: '#cbd5e1',
-    700: '#475569',
-    900: '#0F1724'
+    50: '#ffffff',
+    100: '#f7fafc',
+    200: '#edf2f7',
+    400: '#cfe8ef',
+    700: '#2b3942',
+    900: '#071328'
   }
 }
 
@@ -37,6 +41,16 @@ const fonts = {
 
 const styles = {
   global: {
+    '@keyframes gradientShift': {
+      '0%': { backgroundPosition: '0% 50%' },
+      '50%': { backgroundPosition: '100% 50%' },
+      '100%': { backgroundPosition: '0% 50%' }
+    },
+    '.card-kinetic': {
+      backgroundSize: '200% 200%',
+      animation: 'gradientShift 6s ease infinite',
+      transition: 'transform 220ms ease, box-shadow 220ms ease'
+    },
     body: {
       bg: 'neutral.50',
       color: 'neutral.900'
@@ -46,7 +60,7 @@ const styles = {
     },
     a: {
       color: 'brand.500',
-      _hover: { textDecoration: 'underline' }
+      _hover: { textDecoration: 'underline', color: 'brand.600' }
     }
   }
 }
@@ -54,7 +68,7 @@ const styles = {
 const components = {
   Button: {
     baseStyle: {
-      fontWeight: 600,
+      fontWeight: 700,
       borderRadius: '10px'
     },
     sizes: {
@@ -72,9 +86,9 @@ const components = {
       },
       outline: {
         borderWidth: '2px',
-        borderColor: 'rgba(11, 95, 255, 0.12)',
+        borderColor: 'rgba(0,184,148,0.12)',
         color: 'brand.500',
-        _hover: { bg: 'rgba(11, 95, 255, 0.04)' }
+        _hover: { bg: 'rgba(0,184,148,0.04)' }
       }
     },
     defaultProps: {
@@ -84,14 +98,19 @@ const components = {
   Card: {
     baseStyle: {
       borderRadius: 'md',
-      boxShadow: '0 6px 18px rgba(12, 20, 44, 0.08)',
-      bg: 'white'
+      boxShadow: '0 8px 24px rgba(2,168,125,0.08)',
+      bgGradient: 'linear(to-r, brand.500, accent.500)',
+      color: 'white',
+      backgroundSize: '200% 200%',
+      _hover: { transform: 'translateY(-6px)', boxShadow: '0 12px 36px rgba(2,168,125,0.12)' },
+      className: 'card-kinetic'
     }
   },
   Heading: {
     baseStyle: {
-      fontWeight: 700,
-      fontFamily: 'heading'
+      fontWeight: 800,
+      fontFamily: 'heading',
+      color: 'neutral.900'
     }
   }
 }

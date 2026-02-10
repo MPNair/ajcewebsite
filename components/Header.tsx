@@ -23,19 +23,21 @@ export default function Header() {
   }
 
   return (
-    <Box bg="white" borderBottom="1px solid" borderColor="neutral.100" position="sticky" top={0} zIndex={40}>
+    <Box bg="transparent" borderBottom="1px solid" borderColor="rgba(255,255,255,0.06)" position="sticky" top={0} zIndex={40}>
       <Container maxW="1200px" py={4}>
         <Flex justify="space-between" align="center" gap={6}>
           <Link href="/">
-            <Box fontWeight="700" fontSize="lg" color="brand.500">
+            <Box fontWeight="800" fontSize="lg" color="brand.500">
               AMAL JYOTHI
             </Box>
           </Link>
 
-          <HStack gap={8} display={{ base: 'none', md: 'flex' }}>
+          <HStack gap={8} display={{ base: 'none', md: 'flex' }} color="white">
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
             <Link href="/academics">Academics</Link>
+            <Link href="/academics-details">Academic Details</Link>
+            <Link href="/faculty">Faculty</Link>
             <Link href="/admissions">Admissions</Link>
             <Link href="/placements">Placements</Link>
             <Link href="/contact">Contact</Link>

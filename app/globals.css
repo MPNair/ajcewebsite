@@ -1,0 +1,118 @@
+/* Global kinetic helpers and accessibility-aware animations */
+:root {
+  --brand-500: #00b894;
+  --accent-500: #55efc4;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card-kinetic {
+  background: linear-gradient(135deg, var(--brand-500), var(--accent-500));
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+.card-kinetic--float {
+  animation: gradientShift 6s ease infinite, floatUp 6s ease-in-out infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card-kinetic, .card-kinetic--float {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Hero blended background matching card gradient with subtle animated blobs */
+.hero-blend {
+  background: linear-gradient(135deg, var(--brand-500) 0%, var(--accent-500) 100%);
+  position: relative;
+  overflow: hidden;
+  color: white;
+  border-radius: 6px;
+  padding: 48px 32px;
+}
+
+.hero-blend::before,
+.hero-blend::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-blend::before {
+  width: 360px;
+  height: 360px;
+  left: -80px;
+  top: -60px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), transparent 40%);
+  animation: floatHero1 10s ease-in-out infinite;
+}
+
+.hero-blend::after {
+  width: 480px;
+  height: 480px;
+  right: -140px;
+  bottom: -80px;
+  background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.12), transparent 40%);
+  animation: floatHero2 12s ease-in-out infinite;
+}
+
+@keyframes floatHero1 {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-18px) translateX(8px) rotate(6deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+@keyframes floatHero2 {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(22px) translateX(-12px) rotate(-6deg); }
+  100% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+
+/* Blurred moving backdrop behind individual cards */
+.card-with-backdrop {
+  position: relative;
+  overflow: visible;
+}
+.card-with-backdrop::before {
+  content: '';
+  position: absolute;
+  inset: -18px -28px auto -28px;
+  height: 72px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 30%), linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  filter: blur(18px);
+  z-index: -1;
+  transform: translateY(6px);
+  animation: backdropFloat 8s ease-in-out infinite;
+}
+
+@keyframes backdropFloat {
+  0% { transform: translateY(6px) translateX(0); opacity: 0.9 }
+  50% { transform: translateY(-8px) translateX(6px); opacity: 1 }
+  100% { transform: translateY(6px) translateX(0); opacity: 0.9 }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blend::before, .hero-blend::after, .card-with-backdrop::before {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
