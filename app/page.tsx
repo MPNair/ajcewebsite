@@ -109,7 +109,7 @@ export default function Home() {
                 <Button colorScheme="whiteAlpha" size="lg" fontWeight="600">
                   Explore Programs
                 </Button>
-                <Button variant="outline" size="lg" fontWeight="600" borderColor="white" color="white"_hover={{ bg: 'rgba(255,255,255,0.1)' }}>
+                <Button variant="outline" size="lg" fontWeight="600" borderColor="white" color="white" _hover={{ bg: 'rgba(255,255,255,0.1)' }}>
                   Apply Now
                 </Button>
               </HStack>
@@ -153,7 +153,7 @@ export default function Home() {
         <Container maxW="1200px">
           <HStack justify="space-between" mb={8}>
             <Heading size="lg">Latest News</Heading>
-            <Button rightIcon={<ArrowRight />} variant="ghost" colorScheme="brand">
+            <Button as="a" href="/news" rightIcon={<ArrowRight />} variant="ghost" colorScheme="brand">
               View All
             </Button>
           </HStack>
@@ -184,7 +184,7 @@ export default function Home() {
         <Container maxW="1200px">
           <HStack justify="space-between" mb={8}>
             <Heading size="lg">Upcoming Events</Heading>
-            <Button rightIcon={<ArrowRight />} variant="ghost" colorScheme="brand">
+            <Button as="a" href="/events" rightIcon={<ArrowRight />} variant="ghost" colorScheme="brand">
               View All
             </Button>
           </HStack>
@@ -215,7 +215,7 @@ export default function Home() {
         <Container maxW="1200px">
           <HStack justify="space-between" mb={8}>
             <Heading size="lg">Featured Programs</Heading>
-            <Button rightIcon={<ArrowRight />} variant="ghost" colorScheme="brand">
+            <Button as="a" href="/academics" rightIcon={<ArrowRight />} variant="ghost" colorScheme="brand">
               View All
             </Button>
           </HStack>
