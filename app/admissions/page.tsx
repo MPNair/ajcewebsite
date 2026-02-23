@@ -16,6 +16,7 @@ import {
   Icon,
 } from '@chakra-ui/react'
 import AppLayout from '@/components/layouts/AppLayout'
+import Link from 'next/link'
 import { CheckCircle, Clock, BookOpen } from 'lucide-react'
 
 const eligibilityCriteria = [
@@ -153,15 +154,15 @@ export default function AdmissionsPage() {
             </Box>
 
             {/* CTA Section */}
-            <Box textAlign="center" bg="brand.500" color="white" p={8} borderRadius="lg">
-              <Heading mb={3}>Ready to Apply?</Heading>
-              <Text mb={6}>Submit your application today and take the first step towards your engineering career</Text>
+            <Box textAlign="center" bg="neutral.900" color="white" p={12} borderRadius="2xl" shadow="2xl">
+              <Heading mb={4} size="xl">Ready to Apply?</Heading>
+              <Text mb={8} fontSize="lg" color="whiteAlpha.800">Submit your application today and take the first step towards your engineering career</Text>
               <HStack spacing={4} justify="center">
-                <Button bg="white" color="brand.500" fontWeight="600">
+                <Button as={Link} href="/apply" bg="brand.500" color="white" size="lg" px={8} fontWeight="700" _hover={{ bg: 'brand.600' }}>
                   Apply Now
                 </Button>
-                <Button variant="outline" color="white" borderColor="white">
-                  Download Brochure
+                <Button as={Link} href="/brochure" variant="outline" color="white" borderColor="white" size="lg" px={8} fontWeight="700" _hover={{ bg: 'whiteAlpha.100' }}>
+                  View Brochure
                 </Button>
               </HStack>
             </Box>

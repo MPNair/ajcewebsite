@@ -17,7 +17,7 @@ export default function BackgroundAnimation() {
       const diff = y - lastY
       lastY = y
       // subtle parallax effect by shifting background layers based on scroll
-      const layers = el.querySelectorAll<HTMLElement>('.bg-layer')
+      const layers = el!.querySelectorAll<HTMLElement>('.bg-layer')
       layers.forEach((layer, idx) => {
         const speed = (idx + 1) * 0.03
         const translate = Math.round(y * speed)

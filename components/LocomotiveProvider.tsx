@@ -11,6 +11,7 @@ export default function LocomotiveProvider({ children }: { children: React.React
     if (!containerRef.current) return
 
     const loco = new LocomotiveScroll({
+      // @ts-ignore
       el: containerRef.current,
       smooth: true,
       multiplier: 0.8,

@@ -1,21 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  Button,
-  Grid,
-  SimpleGrid,
-  HStack,
-  Icon,
-  Spinner,
-  VStack,
-  Image,
-  Center,
-} from '@chakra-ui/react'
+import { Box, Container, Heading, Text, Button, Grid, SimpleGrid, HStack, Icon, Spinner, VStack, Image, Center } from '@chakra-ui/react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, MapPin, Users, Trophy, BookOpen } from 'lucide-react'
 import AppLayout from '@/components/layouts/AppLayout'
@@ -60,7 +47,7 @@ export default function Home() {
       try {
         setIsLoading(true)
         const [newsRes, eventsRes, coursesRes] = await Promise.all([
-          apiClient.getNews(1, 3),
+          apiClient.getNews({ page: 1, limit: 3 }),
           apiClient.getEvents(),
           apiClient.getCourses(),
         ])
@@ -106,10 +93,10 @@ export default function Home() {
                 Shaping the Next Generation of Engineers. A beacon of academic excellence, innovation, and holistic development for over two decades.
               </Text>
               <HStack spacing={4}>
-                <Button colorScheme="whiteAlpha" size="lg" fontWeight="600">
+                <Button as={Link} href="/academics" colorScheme="whiteAlpha" size="lg" fontWeight="600">
                   Explore Programs
                 </Button>
-                <Button variant="outline" size="lg" fontWeight="600" borderColor="white" color="white" _hover={{ bg: 'rgba(255,255,255,0.1)' }}>
+                <Button as={Link} href="/apply" variant="outline" size="lg" fontWeight="600" borderColor="white" color="white" _hover={{ bg: 'whiteAlpha.200' }}>
                   Apply Now
                 </Button>
               </HStack>
@@ -242,13 +229,13 @@ export default function Home() {
       </Box>
 
       {/* CTA Section */}
-      <Box bg="brand.500" color="white" py={12}>
+      <Box bg="neutral.900" color="white" py={16}>
         <Container maxW="1200px" textAlign="center">
-          <Heading mb={4}>Ready to Start Your Engineering Journey?</Heading>
-          <Text mb={8} fontSize="lg" opacity={0.95}>
+          <Heading mb={6} size="xl">Ready to Start Your Engineering Journey?</Heading>
+          <Text mb={10} fontSize="lg" color="whiteAlpha.800">
             Join thousands of successful engineers from Amal Jyothi College of Engineering
           </Text>
-          <Button colorScheme="whiteAlpha" size="lg" fontWeight="600">
+          <Button as={Link} href="/apply" bg="brand.500" color="white" size="lg" fontWeight="600" _hover={{ bg: 'brand.600' }} shadow="xl">
             Apply Now
           </Button>
         </Container>

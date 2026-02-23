@@ -58,7 +58,6 @@ export default function DashboardNav() {
               <Link key={item.href} href={item.href}>
                 <Button
                   w="100%"
-                  justify="flex-start"
                   variant={isActive ? 'solid' : 'ghost'}
                   colorScheme={isActive ? 'brand' : 'gray'}
                   leftIcon={<Icon as={item.icon} w={4} h={4} />}

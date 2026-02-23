@@ -68,7 +68,7 @@ export default function ForumPage() {
 
     try {
       setIsSubmitting(true)
-      await apiClient.createForumPost(newPostTitle, newPostBody)
+      await apiClient.createForumPost({ title: newPostTitle, body: newPostBody })
       toast({ title: 'Post created successfully', status: 'success', duration: 3 })
       setNewPostTitle('')
       setNewPostBody('')

@@ -1,7 +1,7 @@
 'use client'
 
-import { Box, Flex, HStack, Button, Icon, Avatar, Menu, MenuButton, MenuList, MenuItem, Container } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Box, Flex, HStack, Button, Icon, Avatar, Menu, MenuButton, MenuList, MenuItem, Container, Input, InputGroup, InputLeftElement, Link as ChakraLink } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import { SearchIcon } from '@chakra-ui/icons'
 import { useAuthStore } from '@/lib/store'
@@ -11,6 +11,8 @@ export default function Header() {
   const router = useRouter()
   const { user, token, logout, restoreSession } = useAuthStore()
   const [isClient, setIsClient] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
@@ -22,61 +24,102 @@ export default function Header() {
     router.push('/')
   }
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setIsSearchOpen(false)
+      setSearchQuery('')
+    }
+  }
+
   return (
-    <Box bg="transparent" borderBottom="1px solid" borderColor="rgba(255,255,255,0.06)" position="sticky" top={0} zIndex={40}>
-      <Container maxW="1200px" py={4}>
+    <Box bg="neutral.900" borderBottom="1px solid" borderColor="whiteAlpha.100" position="sticky" top={0} zIndex={40}>
+      <Container maxW="1200px" py={3}>
         <Flex justify="space-between" align="center" gap={6}>
-          <Link href="/">
-            <Box fontWeight="800" fontSize="lg" color="brand.500">
-              AMAL JYOTHI
+          <NextLink href="/" passHref legacyBehavior>
+            <ChakraLink _hover={{ textDecoration: 'none' }}>
+              <Box fontWeight="800" fontSize="xl" color="white" letterSpacing="tight">
+                AMAL JYOTHI
+              </Box>
+            </ChakraLink>
+          </NextLink>
+
+          {!isSearchOpen ? (
+            <>
+              <HStack gap={6} display={{ base: 'none', lg: 'flex' }} color="white" fontWeight="500">
+                <ChakraLink as={NextLink} href="/" _hover={{ color: 'brand.200' }}>Home</ChakraLink>
+                <ChakraLink as={NextLink} href="/about" _hover={{ color: 'brand.200' }}>About</ChakraLink>
+                <ChakraLink as={NextLink} href="/academics" _hover={{ color: 'brand.200' }}>Academics</ChakraLink>
+                <ChakraLink as={NextLink} href="/faculty" _hover={{ color: 'brand.200' }}>Faculty</ChakraLink>
+                <ChakraLink as={NextLink} href="/admissions" _hover={{ color: 'brand.200' }}>Admissions</ChakraLink>
+                <ChakraLink as={NextLink} href="/placements" _hover={{ color: 'brand.200' }}>Placements</ChakraLink>
+                <ChakraLink as={NextLink} href="/contact" _hover={{ color: 'brand.200' }}>Contact</ChakraLink>
+              </HStack>
+
+              <HStack gap={3}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  color="white"
+                  leftIcon={<SearchIcon />}
+                  display={{ base: 'none', md: 'flex' }}
+                  onClick={() => setIsSearchOpen(true)}
+                />
+
+                {isClient && token && user ? (
+                  <Menu>
+                    <MenuButton as={Button} variant="ghost" p={0}>
+                      <Avatar name={user.name} size="sm" />
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem as={NextLink} href={`/profile/${user.id}`}>
+                        My Profile
+                      </MenuItem>
+                      {user.role === 'student' && (
+                        <MenuItem as={NextLink} href="/dashboard">
+                          Dashboard
+                        </MenuItem>
+                      )}
+                      <MenuItem as={NextLink} href="/settings">
+                        Settings
+                      </MenuItem>
+                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </MenuList>
+                  </Menu>
+                ) : (
+                  <>
+                    <Button variant="ghost" size="sm" color="white" as={NextLink} href="/login">
+                      Login
+                    </Button>
+                    <Button size="sm" bg="brand.500" color="white" as={NextLink} href="/apply" _hover={{ bg: 'brand.600' }}>
+                      Apply Now
+                    </Button>
+                  </>
+                )}
+              </HStack>
+            </>
+          ) : (
+            <Box flex={1} maxW="600px">
+              <form onSubmit={handleSearch}>
+                <InputGroup size="sm">
+                  <InputLeftElement pointerEvents="none">
+                    <SearchIcon color="gray.300" />
+                  </InputLeftElement>
+                  <Input
+                    placeholder="Search articles, courses, events..."
+                    bg="whiteAlpha.200"
+                    border="none"
+                    color="white"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    onBlur={() => !searchQuery && setIsSearchOpen(false)}
+                  />
+                </InputGroup>
+              </form>
             </Box>
-          </Link>
-
-          <HStack gap={8} display={{ base: 'none', md: 'flex' }} color="white">
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/academics">Academics</Link>
-            <Link href="/academics-details">Academic Details</Link>
-            <Link href="/faculty">Faculty</Link>
-            <Link href="/admissions">Admissions</Link>
-            <Link href="/placements">Placements</Link>
-            <Link href="/contact">Contact</Link>
-          </HStack>
-
-          <HStack gap={3}>
-            <Button variant="ghost" size="sm" leftIcon={<SearchIcon />} display={{ base: 'none', md: 'flex' }} />
-            
-            {isClient && token && user ? (
-              <Menu>
-                <MenuButton as={Button} variant="ghost" p={0}>
-                  <Avatar name={user.name} size="sm" />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem as={Link} href={`/profile/${user.id}`}>
-                    My Profile
-                  </MenuItem>
-                  {user.role === 'student' && (
-                    <MenuItem as={Link} href="/dashboard">
-                      Dashboard
-                    </MenuItem>
-                  )}
-                  <MenuItem as={Link} href="/settings">
-                    Settings
-                  </MenuItem>
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                </MenuList>
-              </Menu>
-            ) : (
-              <>
-                <Button variant="ghost" size="sm" as={Link} href="/login">
-                  Login
-                </Button>
-                <Button size="sm" bg="brand.500" color="white" as={Link} href="/apply">
-                  Apply Now
-                </Button>
-              </>
-            )}
-          </HStack>
+          )}
         </Flex>
       </Container>
     </Box>

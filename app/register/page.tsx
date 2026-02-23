@@ -94,7 +94,7 @@ export default function RegisterPage() {
 
     try {
       setIsLoading(true)
-      await register(formData.email, formData.password, formData.name, formData.role)
+      await register({ name: formData.name, email: formData.email, password: formData.password, role: formData.role })
       toast({
         title: 'Registration successful',
         description: 'Redirecting to dashboard...',

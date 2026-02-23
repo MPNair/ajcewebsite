@@ -5,7 +5,7 @@ import theme from '@/lib/theme'
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '@/lib/store'
 import BackgroundAnimation from '@/components/BackgroundAnimation'
-import LocomotiveProvider from '@/components/LocomotiveProvider'
+// import LocomotiveProvider from '@/components/LocomotiveProvider'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [isClient, setIsClient] = useState(false)
@@ -24,9 +24,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ChakraProvider theme={theme}>
       <Box position="relative">
         <BackgroundAnimation />
-        <LocomotiveProvider>
-          {children}
-        </LocomotiveProvider>
+        {children}
       </Box>
     </ChakraProvider>
   )

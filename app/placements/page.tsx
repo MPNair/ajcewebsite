@@ -13,7 +13,9 @@ import {
   Card,
   CardBody,
   HStack,
+  Button,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import AppLayout from '@/components/layouts/AppLayout'
 import StatWidget from '@/components/StatWidget'
 import PlacementCard from '@/components/PlacementCard'
@@ -141,8 +143,8 @@ export default function PlacementsPage() {
                       Pre-Final Year
                     </Heading>
                     <Text fontSize="sm" color="gray.600">
-                      • Aptitude training workshops<br/>
-                      • Personality development sessions<br/>
+                      • Aptitude training workshops<br />
+                      • Personality development sessions<br />
                       • Industry interaction seminars
                     </Text>
                   </CardBody>
@@ -153,8 +155,8 @@ export default function PlacementsPage() {
                       Final Year
                     </Heading>
                     <Text fontSize="sm" color="gray.600">
-                      • Campus recruitment drives<br/>
-                      • Interview preparation coaching<br/>
+                      • Campus recruitment drives<br />
+                      • Interview preparation coaching<br />
                       • One-on-one mentoring sessions
                     </Text>
                   </CardBody>
@@ -163,9 +165,14 @@ export default function PlacementsPage() {
             </Box>
 
             {/* Call to Action */}
-            <Box textAlign="center" bg="accent.500" color="white" p={8} borderRadius="lg">
-              <Heading mb={3}>Join Our Success Stories</Heading>
-              <Text mb={6}>Be part of our alumni network and achieve great career milestones</Text>
+            <Box textAlign="center" bg="neutral.900" color="white" p={10} borderRadius="2xl" shadow="xl">
+              <Heading mb={4} size="xl">Join Our Success Stories</Heading>
+              <Text mb={8} fontSize="lg" color="whiteAlpha.800">
+                Be part of our elite alumni network and achieve great career milestones with top global companies.
+              </Text>
+              <Button as={Link} href="/apply" bg="brand.500" color="white" size="lg" _hover={{ bg: 'brand.600' }}>
+                Join AJCE Now
+              </Button>
             </Box>
           </VStack>
         </Container>

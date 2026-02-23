@@ -6,61 +6,47 @@ const config: ThemeConfig = {
 }
 
 const colors = {
-  // Restored blue-teal palette (original)
   brand: {
-    50: '#e6f7ff',
-    100: '#ccefff',
-    200: '#99e0ff',
-    light: '#e6f0ff',
+    50: '#f0f9ff',
+    100: '#e0f2fe',
+    200: '#bae6fd',
+    light: '#f0f7ff',
     primary: '#0ea5e9',
-    500: '#0ea5e9',
-    600: '#0686c8',
-    700: '#046a9a'
+    500: '#0284c7', // Darker blue for better contrast
+    600: '#0369a1',
+    700: '#075985'
   },
   accent: {
-    50: '#e6fff9',
-    100: '#ccfff3',
-    500: '#14b8a6',
-    600: '#0ea58f',
-    700: '#0b8f76'
+    50: '#f0fdfa',
+    100: '#ccfbf1',
+    500: '#0d9488',
+    600: '#0f766e',
+    700: '#115e59'
   },
   neutral: {
-    50: '#ffffff',
-    100: '#f7fafc',
-    200: '#edf2f7',
-    400: '#cfe8ef',
-    700: '#2b3942',
-    900: '#071328'
+    50: '#f8fafc',
+    100: '#f1f5f9',
+    200: '#e2e8f0',
+    400: '#94a3b8',
+    700: '#334155',
+    900: '#0f172a' // Solid dark navy
   }
 }
 
 const fonts = {
-  body: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  heading: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+  body: 'var(--font-inter), system-ui, sans-serif',
+  heading: 'var(--font-outfit), system-ui, sans-serif'
 }
 
 const styles = {
   global: {
-    '@keyframes gradientShift': {
-      '0%': { backgroundPosition: '0% 50%' },
-      '50%': { backgroundPosition: '100% 50%' },
-      '100%': { backgroundPosition: '0% 50%' }
-    },
-    '.card-kinetic': {
-      backgroundSize: '200% 200%',
-      animation: 'gradientShift 6s ease infinite',
-      transition: 'transform 220ms ease, box-shadow 220ms ease'
-    },
     body: {
       bg: 'neutral.50',
       color: 'neutral.900'
     },
-    'html, body': {
-      fontSize: '14px'
-    },
     a: {
       color: 'brand.500',
-      _hover: { textDecoration: 'underline', color: 'brand.600' }
+      _hover: { textDecoration: 'none', color: 'brand.600' }
     }
   }
 }
@@ -68,48 +54,43 @@ const styles = {
 const components = {
   Button: {
     baseStyle: {
-      fontWeight: 700,
-      borderRadius: '10px'
-    },
-    sizes: {
-      lg: {
-        h: '48px',
-        px: '20px'
-      }
+      fontWeight: 600,
+      borderRadius: '8px',
+      transition: 'all 0.2s cubic-bezier(.08,.52,.52,1)'
     },
     variants: {
       primary: {
         bg: 'brand.500',
         color: 'white',
-        _hover: { bg: 'brand.600' },
-        _active: { bg: 'brand.700' }
+        _hover: { bg: 'brand.600', transform: 'translateY(-1px)' },
+        _active: { bg: 'brand.700', transform: 'translateY(0)' }
       },
       outline: {
         borderWidth: '2px',
-        borderColor: 'rgba(0,184,148,0.12)',
+        borderColor: 'brand.500',
         color: 'brand.500',
-        _hover: { bg: 'rgba(0,184,148,0.04)' }
+        _hover: { bg: 'brand.50', transform: 'translateY(-1px)' },
+        _active: { bg: 'brand.100', transform: 'translateY(0)' }
+      },
+      ghost: {
+        color: 'white',
+        _hover: { bg: 'whiteAlpha.200' }
       }
-    },
-    defaultProps: {
-      variant: 'primary'
     }
   },
   Card: {
     baseStyle: {
-      borderRadius: 'md',
-      boxShadow: '0 8px 24px rgba(2,168,125,0.08)',
-      bgGradient: 'linear(to-r, brand.500, accent.500)',
-      color: 'white',
-      backgroundSize: '200% 200%',
-      _hover: { transform: 'translateY(-6px)', boxShadow: '0 12px 36px rgba(2,168,125,0.12)' },
-      className: 'card-kinetic'
+      borderRadius: 'xl',
+      border: '1px solid',
+      borderColor: 'neutral.200',
+      boxShadow: 'sm',
+      bg: 'white',
+      _hover: { boxShadow: 'md' }
     }
   },
   Heading: {
     baseStyle: {
-      fontWeight: 800,
-      fontFamily: 'heading',
+      fontWeight: 700,
       color: 'neutral.900'
     }
   }

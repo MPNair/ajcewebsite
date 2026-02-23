@@ -59,7 +59,7 @@ export default function ForumPostCard({
             </HStack>
           </HStack>
 
-          <Link href={`/forum/${id}`}>
+          <Link href={`/dashboard/forum/${id}`}>
             <Button w="full" colorScheme="brand" variant="outline" size="sm">
               View Discussion
             </Button>

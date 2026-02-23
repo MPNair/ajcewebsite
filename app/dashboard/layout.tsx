@@ -22,11 +22,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <Grid templateColumns={{ base: '1fr', md: '280px 1fr' }} minH="100vh" gap={0}>
-      <Box display={{ base: 'none', md: 'block' }} bg="gray.50">
+    <Box minH="100vh">
+      {/* Mobile Header */}
+      <Box display={{ base: 'block', md: 'none' }} bg="gray.50" p={4} borderBottom="1px" borderColor="gray.200">
         <DashboardNav />
       </Box>
-      <Box>{children}</Box>
-    </Grid>
+      
+      <Grid templateColumns={{ base: '1fr', md: '280px 1fr' }} minH="100vh" gap={0}>
+        <Box display={{ base: 'none', md: 'block' }} bg="gray.50">
+          <DashboardNav />
+        </Box>
+        <Box>{children}</Box>
+      </Grid>
+    </Box>
   )
 }
