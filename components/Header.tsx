@@ -34,12 +34,12 @@ export default function Header() {
   }
 
   return (
-    <Box bg="neutral.900" borderBottom="1px solid" borderColor="whiteAlpha.100" position="sticky" top={0} zIndex={40}>
-      <Container maxW="1200px" py={3}>
+    <Box bg="transparent" position="sticky" top={0} zIndex={40} pt={3} px={{ base: 3, md: 5 }}>
+      <Container maxW="1200px" py={3} className="glass-panel gaze-panel floating-panel" borderRadius="16px">
         <Flex justify="space-between" align="center" gap={6}>
           <NextLink href="/" passHref legacyBehavior>
             <ChakraLink _hover={{ textDecoration: 'none' }}>
-              <Box fontWeight="800" fontSize="xl" color="white" letterSpacing="tight">
+              <Box fontWeight="800" fontSize="xl" color="neutral.900" letterSpacing="tight">
                 AMAL JYOTHI
               </Box>
             </ChakraLink>
@@ -47,21 +47,21 @@ export default function Header() {
 
           {!isSearchOpen ? (
             <>
-              <HStack gap={6} display={{ base: 'none', lg: 'flex' }} color="white" fontWeight="500">
-                <ChakraLink as={NextLink} href="/" _hover={{ color: 'brand.200' }}>Home</ChakraLink>
-                <ChakraLink as={NextLink} href="/about" _hover={{ color: 'brand.200' }}>About</ChakraLink>
-                <ChakraLink as={NextLink} href="/academics" _hover={{ color: 'brand.200' }}>Academics</ChakraLink>
-                <ChakraLink as={NextLink} href="/faculty" _hover={{ color: 'brand.200' }}>Faculty</ChakraLink>
-                <ChakraLink as={NextLink} href="/admissions" _hover={{ color: 'brand.200' }}>Admissions</ChakraLink>
-                <ChakraLink as={NextLink} href="/placements" _hover={{ color: 'brand.200' }}>Placements</ChakraLink>
-                <ChakraLink as={NextLink} href="/contact" _hover={{ color: 'brand.200' }}>Contact</ChakraLink>
+              <HStack gap={6} display={{ base: 'none', lg: 'flex' }} color="neutral.800" fontWeight="500">
+                <ChakraLink as={NextLink} href="/" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">Home</ChakraLink>
+                <ChakraLink as={NextLink} href="/about" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">About</ChakraLink>
+                <ChakraLink as={NextLink} href="/academics" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">Academics</ChakraLink>
+                <ChakraLink as={NextLink} href="/faculty" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">Faculty</ChakraLink>
+                <ChakraLink as={NextLink} href="/admissions" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">Admissions</ChakraLink>
+                <ChakraLink as={NextLink} href="/placements" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">Placements</ChakraLink>
+                <ChakraLink as={NextLink} href="/contact" _hover={{ color: 'brand.600', transform: 'scale(1.05)' }} transition="all 0.25s ease">Contact</ChakraLink>
               </HStack>
 
               <HStack gap={3}>
                 <Button
                   variant="ghost"
                   size="sm"
-                  color="white"
+                  color="neutral.800"
                   leftIcon={<SearchIcon />}
                   display={{ base: 'none', md: 'flex' }}
                   onClick={() => setIsSearchOpen(true)}
@@ -89,7 +89,7 @@ export default function Header() {
                   </Menu>
                 ) : (
                   <>
-                    <Button variant="ghost" size="sm" color="white" as={NextLink} href="/login">
+                    <Button variant="ghost" size="sm" color="neutral.800" as={NextLink} href="/login">
                       Login
                     </Button>
                     <Button size="sm" bg="brand.500" color="white" as={NextLink} href="/apply" _hover={{ bg: 'brand.600' }}>
@@ -108,9 +108,9 @@ export default function Header() {
                   </InputLeftElement>
                   <Input
                     placeholder="Search articles, courses, events..."
-                    bg="whiteAlpha.200"
+                    bg="whiteAlpha.700"
                     border="none"
-                    color="white"
+                    color="neutral.900"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     autoFocus

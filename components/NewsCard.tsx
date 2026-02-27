@@ -1,5 +1,6 @@
 import { Box, Card, CardBody, Image, Heading, Text, HStack, Badge, Button, Stack } from '@chakra-ui/react'
 import Link from 'next/link'
+import { type MouseEvent } from 'react'
 
 interface NewsCardProps {
   id: string
@@ -15,8 +16,17 @@ export default function NewsCard({ id, title, excerpt, author, image, publishedA
   const pubDate = new Date(publishedAt)
   const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
 
+  const updateGaze = (event: MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget
+    const rect = target.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+    target.style.setProperty('--gx', `${x}%`)
+    target.style.setProperty('--gy', `${y}%`)
+  }
+
   return (
-    <Card h="100%" transition="all 0.3s" _hover={{ shadow: 'lg' }} overflow="hidden">
+    <Card h="100%" transition="all 0.3s" _hover={{ shadow: 'lg' }} overflow="hidden" className="glass-panel gaze-panel" bg="whiteAlpha.800" onMouseMove={updateGaze}>
       {image && (
         <Box h="200px" overflow="hidden" bg="gray.200">
           <Image src={image} alt={title} w="100%" h="100%" objectFit="cover" />

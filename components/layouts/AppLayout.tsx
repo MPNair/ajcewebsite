@@ -11,12 +11,12 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children, showSidebar = false, sidebar }: AppLayoutProps) {
   return (
-    <Box minH="100vh" display="flex" flexDirection="column" bg="neutral.50">
+    <Box minH="100vh" display="flex" flexDirection="column" bg="neutral.50" className="spatial-stage">
       <Header />
       
       {showSidebar ? (
         <Grid templateColumns="280px 1fr" flex="1">
-          <Box bg="white" borderRight="1px solid" borderColor="neutral.100" p={6}>
+          <Box bg="whiteAlpha.700" borderRight="1px solid" borderColor="whiteAlpha.500" p={6} className="glass-panel gaze-panel">
             {sidebar}
           </Box>
           <Box as="main" p={6}>
@@ -26,7 +26,7 @@ export default function AppLayout({ children, showSidebar = false, sidebar }: Ap
           </Box>
         </Grid>
       ) : (
-        <Box as="main" flex="1">
+        <Box as="main" flex="1" position="relative" zIndex={1}>
           <Container maxW="1200px" py={8}>
             {children}
           </Container>

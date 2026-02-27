@@ -1,6 +1,7 @@
 import { Box, Card, CardBody, Heading, Text, Badge, HStack, Button, Stack, Icon } from '@chakra-ui/react'
 import Link from 'next/link'
 import { Calendar, Clock, MapPin } from 'lucide-react'
+import { type MouseEvent } from 'react'
 
 interface EventCardProps {
   id: string
@@ -16,8 +17,17 @@ export default function EventCard({ id, title, date, location, tags = [], rsvpCo
   const formattedDate = eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   const formattedTime = eventDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
 
+  const updateGaze = (event: MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget
+    const rect = target.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+    target.style.setProperty('--gx', `${x}%`)
+    target.style.setProperty('--gy', `${y}%`)
+  }
+
   return (
-    <Card h="100%" transition="all 0.3s" _hover={{ shadow: 'lg', transform: 'translateY(-4px)' }}>
+    <Card h="100%" transition="all 0.3s" _hover={{ shadow: 'lg', transform: 'translateY(-4px)' }} className="glass-panel gaze-panel" bg="whiteAlpha.800" onMouseMove={updateGaze}>
       <CardBody>
         <Stack spacing={3} h="100%" justify="space-between">
           <Box>

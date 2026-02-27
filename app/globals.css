@@ -116,3 +116,126 @@
     filter: none !important;
   }
 }
+
+/* Spatial glassmorphism system */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 18px 40px rgba(2, 6, 23, 0.22);
+}
+
+.spatial-stage {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.spatial-stage::before,
+.spatial-stage::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(56px);
+  z-index: -1;
+}
+
+.spatial-stage::before {
+  width: min(34vw, 460px);
+  height: min(34vw, 460px);
+  top: -14%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.34) 0%, rgba(186, 230, 253, 0) 72%);
+  animation: spatialFloatA 14s ease-in-out infinite;
+}
+
+.spatial-stage::after {
+  width: min(30vw, 420px);
+  height: min(30vw, 420px);
+  bottom: -16%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(204, 251, 241, 0.3) 0%, rgba(204, 251, 241, 0) 74%);
+  animation: spatialFloatB 17s ease-in-out infinite;
+}
+
+.glass-panel {
+  position: relative;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), var(--glass-bg));
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: var(--glass-shadow);
+}
+
+.gaze-panel {
+  --gx: 50%;
+  --gy: 50%;
+  transform-style: preserve-3d;
+  transition: transform 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+}
+
+.gaze-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--gx) var(--gy), rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.03) 52%, transparent 76%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.gaze-panel:hover,
+.gaze-panel:focus-within {
+  transform: translateY(-6px) scale(1.018);
+  border-color: rgba(186, 230, 253, 0.55);
+  box-shadow: 0 26px 52px rgba(2, 6, 23, 0.28);
+}
+
+.gaze-panel:hover::before,
+.gaze-panel:focus-within::before {
+  opacity: 1;
+}
+
+.floating-panel {
+  animation: floatUp 8s ease-in-out infinite;
+}
+
+.depth-layer-near {
+  transform: translateZ(32px);
+}
+
+.depth-layer-mid {
+  transform: translateZ(18px);
+}
+
+@keyframes spatialFloatA {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-10px, 18px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes spatialFloatB {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(12px, -16px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spatial-stage::before,
+  .spatial-stage::after,
+  .floating-panel {
+    animation: none !important;
+  }
+
+  .gaze-panel,
+  .gaze-panel:hover,
+  .gaze-panel:focus-within {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .gaze-panel::before {
+    display: none;
+  }
+}

@@ -108,6 +108,97 @@ const MOCK_COURSES = [
   }
 ]
 
+const MOCK_PLACEMENTS = [
+  {
+    _id: '1',
+    company: 'Tata Consultancy Services (TCS)',
+    role: 'Assistant System Engineer',
+    package: 4.2,
+    year: 2026,
+    student: { name: 'Akhil Mathew' }
+  },
+  {
+    _id: '2',
+    company: 'Infosys Limited',
+    role: 'Systems Engineer',
+    package: 4.5,
+    year: 2026,
+    student: { name: 'Neha Nair' }
+  },
+  {
+    _id: '3',
+    company: 'Wipro Technologies',
+    role: 'Project Engineer',
+    package: 4.0,
+    year: 2026,
+    student: { name: 'Arjun K' }
+  },
+  {
+    _id: '4',
+    company: 'Cognizant Technology Solutions',
+    role: 'Programmer Analyst Trainee',
+    package: 4.8,
+    year: 2025,
+    student: { name: 'Ritika Menon' }
+  },
+  {
+    _id: '5',
+    company: 'HCL Technologies',
+    role: 'Graduate Engineer Trainee',
+    package: 4.3,
+    year: 2025,
+    student: { name: 'Vishnu S' }
+  },
+  {
+    _id: '6',
+    company: 'Accenture India',
+    role: 'Associate Software Engineer',
+    package: 5.5,
+    year: 2025,
+    student: { name: 'Megha Joseph' }
+  },
+  {
+    _id: '7',
+    company: 'IBM India',
+    role: 'Application Developer',
+    package: 6.2,
+    year: 2024,
+    student: { name: 'Rohan Paul' }
+  },
+  {
+    _id: '8',
+    company: 'Deloitte',
+    role: 'Analyst',
+    package: 7.0,
+    year: 2024,
+    student: { name: 'Anjana Varghese' }
+  },
+  {
+    _id: '9',
+    company: 'Microsoft India',
+    role: 'Software Engineer',
+    package: 18.0,
+    year: 2024,
+    student: { name: 'Gokul Raj' }
+  },
+  {
+    _id: '10',
+    company: 'Amazon Development Center',
+    role: 'SDE I',
+    package: 22.0,
+    year: 2024,
+    student: { name: 'Sneha P' }
+  }
+]
+
+const MOCK_PLACEMENTS_DATA = {
+  totalPlacements: 410,
+  averagePackage: 6.5,
+  highestPackage: 22.0,
+  companiesCount: 100,
+  placements: MOCK_PLACEMENTS
+}
+
 class APIClient {
   private api: AxiosInstance
 
@@ -230,7 +321,16 @@ class APIClient {
     try {
       return await this.api.get('/placements', { params: queryParams })
     } catch (e) {
-      return { data: [] }
+      const placements = queryParams?.year
+        ? MOCK_PLACEMENTS.filter((placement) => placement.year === queryParams.year)
+        : MOCK_PLACEMENTS
+
+      return {
+        data: {
+          ...MOCK_PLACEMENTS_DATA,
+          placements
+        }
+      }
     }
   }
 

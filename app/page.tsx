@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type MouseEvent } from 'react'
 import { Box, Container, Heading, Text, Button, Grid, SimpleGrid, HStack, Icon, Spinner, VStack, Image, Center } from '@chakra-ui/react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -64,10 +64,19 @@ export default function Home() {
     fetchData()
   }, [])
 
+  const updateGaze = (event: MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget
+    const rect = target.getBoundingClientRect()
+    const x = ((event.clientX - rect.left) / rect.width) * 100
+    const y = ((event.clientY - rect.top) / rect.height) * 100
+    target.style.setProperty('--gx', `${x}%`)
+    target.style.setProperty('--gy', `${y}%`)
+  }
+
   return (
     <AppLayout>
       {/* Hero Section */}
-      <Box bg="linear-gradient(135deg, #0B5FFF 0%, #00BFA6 100%)" color="white" py={{ base: 16, md: 24 }} position="relative" overflow="hidden">
+      <Box bg="linear-gradient(135deg, #0B5FFF 0%, #00BFA6 100%)" color="white" py={{ base: 16, md: 24 }} position="relative" overflow="hidden" borderRadius="24px" className="spatial-stage glass-panel gaze-panel" onMouseMove={updateGaze}>
         <MotionBox
           position="absolute"
           bottom={-50}
@@ -76,15 +85,28 @@ export default function Home() {
           height={300}
           borderRadius="full"
           bg="rgba(255, 255, 255, 0.1)"
-          animate={{ y: [0, 30, 0] }}
-          transition={{ duration: 6, repeat: 1 }}
+          animate={{ y: [0, 30, 0], x: [0, -12, 0] }}
+          transition={{ duration: 6, repeat: Infinity }}
+        />
+        <MotionBox
+          position="absolute"
+          top={-40}
+          left={-20}
+          width={220}
+          height={220}
+          borderRadius="full"
+          bg="rgba(255, 255, 255, 0.16)"
+          filter="blur(8px)"
+          animate={{ y: [0, -16, 0], x: [0, 10, 0] }}
+          transition={{ duration: 7, repeat: Infinity }}
         />
         <Container maxW="1200px" position="relative" zIndex={1}>
-          <VStack spacing={6} align="flex-start">
+          <VStack spacing={6} align="flex-start" className="depth-layer-near">
             <MotionBox
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              whileHover={{ scale: 1.02 }}
             >
               <Heading as="h1" size="2xl" mb={4} fontWeight="800">
                 Welcome to Amal Jyothi College of Engineering
@@ -106,7 +128,7 @@ export default function Home() {
       </Box>
 
       {/* Highlights Section */}
-      <Box py={{ base: 12, md: 16 }} bg="gray.50">
+      <Box py={{ base: 12, md: 16 }} bg="transparent">
         <Container maxW="1200px">
           <Heading textAlign="center" mb={12} size="xl">
             Why Choose Amal Jyothi?
@@ -119,8 +141,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -6, scale: 1.02 }}
               >
-                <Box textAlign="center" p={6} bg="white" borderRadius="12px" shadow="sm" _hover={{ shadow: 'md' }}>
+                <Box textAlign="center" p={6} bg="whiteAlpha.700" borderRadius="12px" shadow="sm" className="glass-panel gaze-panel" onMouseMove={updateGaze}>
                   <Icon as={item.icon} w={12} h={12} color="brand.500" mx="auto" mb={4} />
                   <Heading size="sm" mb={2}>
                     {item.title}
@@ -136,7 +159,7 @@ export default function Home() {
       </Box>
 
       {/* Latest News Section */}
-      <Box py={{ base: 12, md: 16 }}>
+      <Box py={{ base: 12, md: 16 }} className="spatial-stage">
         <Container maxW="1200px">
           <HStack justify="space-between" mb={8}>
             <Heading size="lg">Latest News</Heading>
@@ -167,7 +190,7 @@ export default function Home() {
       </Box>
 
       {/* Upcoming Events Section */}
-      <Box py={{ base: 12, md: 16 }} bg="gray.50">
+      <Box py={{ base: 12, md: 16 }} bg="transparent" className="spatial-stage">
         <Container maxW="1200px">
           <HStack justify="space-between" mb={8}>
             <Heading size="lg">Upcoming Events</Heading>
@@ -198,7 +221,7 @@ export default function Home() {
       </Box>
 
       {/* Featured Courses Section */}
-      <Box py={{ base: 12, md: 16 }}>
+      <Box py={{ base: 12, md: 16 }} className="spatial-stage">
         <Container maxW="1200px">
           <HStack justify="space-between" mb={8}>
             <Heading size="lg">Featured Programs</Heading>
@@ -229,15 +252,17 @@ export default function Home() {
       </Box>
 
       {/* CTA Section */}
-      <Box bg="neutral.900" color="white" py={16}>
+      <Box bg="transparent" color="white" py={16}>
         <Container maxW="1200px" textAlign="center">
-          <Heading mb={6} size="xl">Ready to Start Your Engineering Journey?</Heading>
-          <Text mb={10} fontSize="lg" color="whiteAlpha.800">
-            Join thousands of successful engineers from Amal Jyothi College of Engineering
-          </Text>
-          <Button as={Link} href="/apply" bg="brand.500" color="white" size="lg" fontWeight="600" _hover={{ bg: 'brand.600' }} shadow="xl">
-            Apply Now
-          </Button>
+          <Box className="glass-panel gaze-panel" borderRadius="24px" py={{ base: 10, md: 14 }} px={{ base: 6, md: 10 }} bg="linear-gradient(135deg, rgba(2,132,199,0.74) 0%, rgba(13,148,136,0.72) 100%)" onMouseMove={updateGaze}>
+            <Heading mb={6} size="xl">Ready to Start Your Engineering Journey?</Heading>
+            <Text mb={10} fontSize="lg" color="whiteAlpha.900">
+              Join thousands of successful engineers from Amal Jyothi College of Engineering
+            </Text>
+            <Button as={Link} href="/apply" bg="whiteAlpha.900" color="neutral.900" size="lg" fontWeight="700" _hover={{ bg: 'white', transform: 'scale(1.03)' }} shadow="xl">
+              Apply Now
+            </Button>
+          </Box>
         </Container>
       </Box>
     </AppLayout>
