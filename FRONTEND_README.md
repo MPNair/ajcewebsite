@@ -7,7 +7,6 @@ This is the Next.js 14 + React 18 + TypeScript frontend for the Amal Jyothi Coll
 
 ### 1. Install Dependencies
 ```bash
-cd client
 npm install
 ```
 
@@ -35,7 +34,7 @@ npm start
 ## Project Structure
 
 ```
-client/
+NESTAJWEB1/
 ├── app/                          # Next.js app directory
 │   ├── page.tsx                 # Home page
 │   ├── layout.tsx               # Root layout with metadata
@@ -83,7 +82,8 @@ client/
 ├── tsconfig.json                # TypeScript config
 ├── next.config.js               # Next.js config
 ├── .env.local.example           # Environment template
-└── README.md                     # This file
+├── README.md                     # Primary project README
+└── FRONTEND_README.md            # Frontend architecture details
 ```
 
 ## Key Technologies
@@ -139,7 +139,7 @@ import { apiClient } from '@/lib/api'
 const response = await apiClient.getCourses()
 
 // Get news with pagination
-const news = await apiClient.getNews(page, limit)
+const news = await apiClient.getNews({ page: 1, limit: 10 })
 
 // Create forum post (requires auth)
 await apiClient.createForumPost(title, body)
@@ -297,11 +297,11 @@ NEXT_PUBLIC_API_URL = https://api.yourdomain.com
 
 For issues or questions:
 - Check existing GitHub issues
-- Review API documentation in `SERVER_SETUP.md`
+- Review `DOCUMENTATION_INDEX.md` and `README.md`
 - Contact development team
 
 ---
 
-**Last Updated**: 2025  
+**Last Updated**: 2026  
 **Version**: 1.0.0  
-**Status**: Frontend Scaffolding Complete ✅
+**Status**: Active and Maintained ✅
